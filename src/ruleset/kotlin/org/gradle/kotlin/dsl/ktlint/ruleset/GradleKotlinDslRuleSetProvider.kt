@@ -2,6 +2,8 @@ package org.gradle.kotlin.dsl.ktlint.ruleset
 
 import com.github.shyiko.ktlint.core.RuleSet
 import com.github.shyiko.ktlint.core.RuleSetProvider
+import com.github.shyiko.ktlint.ruleset.standard.CommentSpacingRule
+import com.github.shyiko.ktlint.ruleset.standard.FilenameRule
 import com.github.shyiko.ktlint.ruleset.standard.FinalNewlineRule
 import com.github.shyiko.ktlint.ruleset.standard.IndentationRule
 import com.github.shyiko.ktlint.ruleset.standard.MaxLineLengthRule
@@ -15,6 +17,7 @@ import com.github.shyiko.ktlint.ruleset.standard.NoSemicolonsRule
 import com.github.shyiko.ktlint.ruleset.standard.NoTrailingSpacesRule
 import com.github.shyiko.ktlint.ruleset.standard.NoUnitReturnRule
 import com.github.shyiko.ktlint.ruleset.standard.NoUnusedImportsRule
+import com.github.shyiko.ktlint.ruleset.standard.PackageNameRule
 import com.github.shyiko.ktlint.ruleset.standard.ParameterListWrappingRule
 import com.github.shyiko.ktlint.ruleset.standard.SpacingAroundColonRule
 import com.github.shyiko.ktlint.ruleset.standard.SpacingAroundCommaRule
@@ -41,7 +44,10 @@ class GradleKotlinDslRuleSetProvider : RuleSetProvider {
 
             // kotlin-dsl: disabled in favor of CustomChainWrappingRule
             // ChainWrappingRule(),
+            CommentSpacingRule(),
+            FilenameRule(),
             FinalNewlineRule(),
+            PackageNameRule(),
             // disabled until it's clear how to reconcile difference in Intellij & Android Studio import layout
             // ImportOrderingRule(),
             IndentationRule(),

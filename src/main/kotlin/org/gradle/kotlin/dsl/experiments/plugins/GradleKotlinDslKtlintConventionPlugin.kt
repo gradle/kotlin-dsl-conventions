@@ -32,17 +32,17 @@ class GradleKotlinDslKtlintConventionPlugin : Plugin<Project> {
         apply(plugin = "org.jlleitschuh.gradle.ktlint")
 
         configure<KtlintExtension> {
-            version = DefaultVersions.ktlint
-            reporters = arrayOf(ReporterType.PLAIN)
+            version.set(DefaultVersions.ktlint)
+            reporters.set(listOf(ReporterType.PLAIN))
         }
 
-        val ktlint = configurations.create("ktlint") {
+        val ktlint = configurations.named("ktlint") {
             exclude(module = "ktlint-ruleset-standard")
         }
 
         dependencies {
-            ktlint(files(gradleKotlinDslKtlintRulesetJar()))
-            ktlint(kotlin("reflect"))
+            ktlint.name(files(gradleKotlinDslKtlintRulesetJar()))
+            ktlint.name(kotlin("reflect"))
         }
     }
 

@@ -295,18 +295,22 @@ class GradleKotlinDslKtlintConventionPluginTest {
             task(taskPath)?.outcome
 
     private
-    val ktlintReportFile: File by lazy { projectDir.resolve("build/reports/ktlint/ktlint-main.txt") }
+    val ktlintReportFile: File by lazy { projectDir.resolve("build/reports/ktlint/ktlintMainCheck.txt") }
 
     private
     fun assertKtlintErrors(count: Int) =
             assertThat(
-                    "ktlint error count",
-                    ktlintReportFile.readLines().filter { it.contains("source.kt:") }.count(),
+                    "ktlint error count in\n${ktlintReportFile.readText()}",
+                    ktlintReportFile.readLines().filter { it.contains("source.kt") }.count(),
                     equalTo(count))
 
     private
     fun assertKtLintError(error: String, line: Int, column: Int) =
             assertThat(
-                    ktlintReportFile.readText(),
+                    ktlintReportFile.readText().withoutAnsiColorCodes(),
                     containsString("source.kt:$line:$column: $error"))
+
+    private
+    fun String.withoutAnsiColorCodes() =
+            replace(Regex("\u001B\\[[;\\d]*m"), "")
 }
