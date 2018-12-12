@@ -8,6 +8,7 @@ plugins {
 
     id("org.gradle.kotlin.ktlint-convention") version "0.1.15"
 
+    signing
     `maven-publish`
     id("com.gradle.plugin-publish") version "0.10.0"
 }
@@ -57,6 +58,14 @@ tasks {
             put("Implementation-Version", this@jar.version)
         }
     }
+}
+
+signing {
+    useGpgCmd()
+    sign(configurations.archives.get())
+    setRequired(Callable {
+        gradle.taskGraph.hasTask("publishPlugins")
+    })
 }
 
 // default versions ---------------------------------------------------
