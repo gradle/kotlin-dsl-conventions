@@ -25,6 +25,16 @@ repositories {
     gradlePluginPortal()
 }
 
+gradlePlugin {
+    plugins {
+        register("ktlint-convention") {
+            id = "org.gradle.kotlin-dsl.ktlint-convention"
+            implementationClass = "org.gradle.kotlin.dsl.experiments.plugins.GradleKotlinDslKtlintConventionPlugin"
+        }
+    }
+}
+
+
 pluginBundle {
     tags = listOf("Kotlin", "DSL")
     website = "https://github.com/gradle/kotlin-dsl-conventions"
@@ -33,13 +43,10 @@ pluginBundle {
         group = project.group.toString()
         artifactId = base.archivesBaseName
     }
-}
-
-gradlePlugin {
     plugins {
-        register("ktlint-convention") {
-            id = "org.gradle.kotlin-dsl.ktlint-convention"
-            implementationClass = "org.gradle.kotlin.dsl.experiments.plugins.GradleKotlinDslKtlintConventionPlugin"
+        named("ktlint-convention") {
+            displayName = "Gradle Kotlin DSL ktlint convention plugin"
+            description = "Gradle Kotlin DSL ktlint convention plugin"
         }
     }
 }
