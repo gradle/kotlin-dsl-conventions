@@ -22,14 +22,14 @@ repositories {
 
 pluginBundle {
     tags = listOf("Kotlin", "DSL")
-    website = "https://github.com/gradle/gradle-kotlin-dsl-plugins-experiments"
-    vcsUrl = "https://github.com/gradle/gradle-kotlin-dsl-plugins-experiments"
+    website = "https://github.com/gradle/kotlin-dsl-conventions"
+    vcsUrl = "https://github.com/gradle/kotlin-dsl-conventions"
 }
 
 gradlePlugin {
     plugins {
         register("ktlint-convention") {
-            id = "org.gradle.kotlin.ktlint-convention"
+            id = "org.gradle.kotlin-dsl.ktlint-convention"
             implementationClass = "org.gradle.kotlin.dsl.experiments.plugins.GradleKotlinDslKtlintConventionPlugin"
         }
     }

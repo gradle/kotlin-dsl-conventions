@@ -34,7 +34,7 @@ class GradleKotlinDslKtlintConventionPluginTest {
         withBuildScript("""
             plugins {
                 kotlin("jvm") version "$embeddedKotlinVersion"
-                id("org.gradle.kotlin.ktlint-convention")
+                id("org.gradle.kotlin-dsl.ktlint-convention")
             }
 
             repositories {
