@@ -13,6 +13,8 @@ plugins {
     id("com.gradle.plugin-publish") version "0.10.0"
 }
 
+group = "org.gradle.kotlin"
+
 kotlinDslPluginOptions {
     experimentalWarning.set(false)
 }
@@ -25,6 +27,10 @@ pluginBundle {
     tags = listOf("Kotlin", "DSL")
     website = "https://github.com/gradle/kotlin-dsl-conventions"
     vcsUrl = "https://github.com/gradle/kotlin-dsl-conventions"
+    mavenCoordinates {
+        group = project.group.toString()
+        artifactId = base.archivesBaseName
+    }
 }
 
 gradlePlugin {
