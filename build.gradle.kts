@@ -81,6 +81,7 @@ if (System.getenv("CI") == "true") {
         termsOfServiceUrl = "https://gradle.com/terms-of-service"
         termsOfServiceAgree = "yes"
         publishAlways()
+        tag("CI")
     }
 }
 
