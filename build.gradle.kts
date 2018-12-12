@@ -8,7 +8,7 @@ plugins {
     `kotlin-dsl`
     id("com.github.johnrengelman.shadow") version "2.0.4" apply false
 
-    id("org.gradle.kotlin.ktlint-convention") version "0.1.15"
+    id("org.gradle.kotlin-dsl.ktlint-convention") version "0.2.0"
 
     signing
     `maven-publish`
