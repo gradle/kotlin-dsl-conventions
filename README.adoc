@@ -1,0 +1,11 @@
+= Gradle Kotlin DSL conventional plugins
+
+== KtLint Convention Plugin
+
+IMPORTANT: The plugin requires a Gradle version of 5.0 or higher.
+
+```
+plugins {
+    id("org.gradle.kotlin-dsl.ktlint-convention").version("0.2.0")
+}
+```
