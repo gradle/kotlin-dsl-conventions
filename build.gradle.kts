@@ -3,6 +3,8 @@ import org.gradle.internal.hash.Hashing
 
 plugins {
 
+    `build-scan`
+
     `kotlin-dsl`
     id("com.github.johnrengelman.shadow") version "2.0.4" apply false
 
@@ -72,6 +74,14 @@ signing {
     setRequired(Callable {
         gradle.taskGraph.hasTask("publishPlugins")
     })
+}
+
+if (System.getenv("CI") == "true") {
+    buildScan {
+        termsOfServiceUrl = "https://gradle.com/terms-of-service"
+        termsOfServiceAgree = "yes"
+        publishAlways()
+    }
 }
 
 // default versions ---------------------------------------------------
