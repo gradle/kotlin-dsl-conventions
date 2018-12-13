@@ -8,6 +8,9 @@ IMPORTANT: The plugin requires a Gradle version of 5.0 or higher.
 
 The plugin applies the link:https://github.com/JLLeitschuh/ktlint-gradle[ktlint-gradle] plugin and configures it with a custom link:https://github.com/shyiko/ktlint[ktlint] rule set with rules extracted from the development of the link:https://github.com/gradle/kotlin-dsl[gradle/kotlin-dsl].
 
+The rule set is the standard `ktlint` ruleset with a few rules on top.
+See the link:src/test/kotlin/org/gradle/kotlin/dsl/experiments/plugins/GradleKotlinDslKtlintConventionPluginTest.kt[integration tests] for more information.
+
 === Usage
 
 Request the plugin using the following:
@@ -23,3 +26,4 @@ Then run `ktlint` checks:
 ```
 gradle ktlintCheck
 ```
+
