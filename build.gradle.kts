@@ -10,7 +10,6 @@ plugins {
 
     id("org.gradle.kotlin-dsl.ktlint-convention") version "0.2.0"
 
-    signing
     `maven-publish`
     id("com.gradle.plugin-publish") version "0.10.0"
 }
@@ -73,14 +72,6 @@ tasks {
             put("Implementation-Version", this@jar.version)
         }
     }
-}
-
-signing {
-    useGpgCmd()
-    sign(configurations.archives.get())
-    setRequired(Callable {
-        gradle.taskGraph.hasTask("publishPlugins")
-    })
 }
 
 if (System.getenv("CI") == "true") {
