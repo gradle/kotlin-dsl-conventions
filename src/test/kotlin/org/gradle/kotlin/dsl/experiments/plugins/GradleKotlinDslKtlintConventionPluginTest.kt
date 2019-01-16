@@ -48,7 +48,7 @@ class GradleKotlinDslKtlintConventionPluginTest {
 
         assertThat(
             build("dependencies", "--configuration", "ktlint", "-s").output,
-            containsString("org.jetbrains.kotlin:kotlin-reflect:$embeddedKotlinVersion")
+            containsString("org.jetbrains.kotlin:kotlin-reflect")
         )
     }
 
