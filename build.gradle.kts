@@ -85,7 +85,7 @@ if (System.getenv("CI") == "true") {
 
 // default versions ---------------------------------------------------
 
-val ktlintVersion = "0.29.0"
+val ktlintVersion = "0.30.0"
 
 val basePackagePath = "org/gradle/kotlin/dsl/experiments/plugins"
 val processResources by tasks.existing(ProcessResources::class)

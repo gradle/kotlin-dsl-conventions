@@ -24,6 +24,7 @@ import com.github.shyiko.ktlint.ruleset.standard.SpacingAroundCommaRule
 import com.github.shyiko.ktlint.ruleset.standard.SpacingAroundCurlyRule
 import com.github.shyiko.ktlint.ruleset.standard.SpacingAroundKeywordRule
 import com.github.shyiko.ktlint.ruleset.standard.SpacingAroundOperatorsRule
+import com.github.shyiko.ktlint.ruleset.standard.SpacingAroundParensRule
 import com.github.shyiko.ktlint.ruleset.standard.SpacingAroundRangeOperatorRule
 import com.github.shyiko.ktlint.ruleset.standard.StringTemplateRule
 
@@ -48,6 +49,9 @@ class GradleKotlinDslRuleSetProvider : RuleSetProvider {
             FilenameRule(),
             FinalNewlineRule(),
             PackageNameRule(),
+            // disabled until auto-correct is working properly
+            // (e.g. try formatting "if (true)\n    return { _ ->\n        _\n}")
+            // MultiLineIfElseRule(),
             // disabled until it's clear how to reconcile difference in Intellij & Android Studio import layout
             // ImportOrderingRule(),
             IndentationRule(),
@@ -74,6 +78,7 @@ class GradleKotlinDslRuleSetProvider : RuleSetProvider {
             SpacingAroundCurlyRule(),
             SpacingAroundKeywordRule(),
             SpacingAroundOperatorsRule(),
+            SpacingAroundParensRule(),
             SpacingAroundRangeOperatorRule(),
             StringTemplateRule(),
 
