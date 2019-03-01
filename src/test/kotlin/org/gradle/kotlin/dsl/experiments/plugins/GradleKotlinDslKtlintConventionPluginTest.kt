@@ -69,21 +69,21 @@ class GradleKotlinDslKtlintConventionPluginTest {
 
         withSource("""val foo = "bar"""")
 
-        build("ktlintMainCheck").apply {
+        build("ktlintMainSourceSetCheck").apply {
 
-            assertThat(outcomeOf(":ktlintMainCheck"), equalTo(TaskOutcome.SUCCESS))
+            assertThat(outcomeOf(":ktlintMainSourceSetCheck"), equalTo(TaskOutcome.SUCCESS))
         }
 
-        build("ktlintMainCheck").apply {
+        build("ktlintMainSourceSetCheck").apply {
 
-            assertThat(outcomeOf(":ktlintMainCheck"), equalTo(TaskOutcome.UP_TO_DATE))
+            assertThat(outcomeOf(":ktlintMainSourceSetCheck"), equalTo(TaskOutcome.UP_TO_DATE))
         }
 
         build("clean")
 
-        build("ktlintMainCheck").apply {
+        build("ktlintMainSourceSetCheck").apply {
 
-            assertThat(outcomeOf(":ktlintMainCheck"), equalTo(TaskOutcome.FROM_CACHE))
+            assertThat(outcomeOf(":ktlintMainSourceSetCheck"), equalTo(TaskOutcome.FROM_CACHE))
         }
     }
 
@@ -105,7 +105,7 @@ class GradleKotlinDslKtlintConventionPluginTest {
             }
         """)
 
-        buildAndFail("ktlintMainCheck")
+        buildAndFail("ktlintMainSourceSetCheck")
 
         assertKtlintErrors(3)
         assertKtLintError("Visibility modifiers must be on their own single line", 2, 1)
@@ -128,7 +128,7 @@ class GradleKotlinDslKtlintConventionPluginTest {
             }
         """)
 
-        build("ktlintMainCheck")
+        build("ktlintMainSourceSetCheck")
     }
 
     @Test
@@ -142,7 +142,7 @@ class GradleKotlinDslKtlintConventionPluginTest {
             import org.gradle.kotlin.dsl.*
         """)
 
-        buildAndFail("ktlintMainCheck")
+        buildAndFail("ktlintMainSourceSetCheck")
 
         assertKtlintErrors(1)
         assertKtLintError("Wildcard import not allowed (org.w3c.dom.*)", 3, 1)
@@ -168,7 +168,7 @@ class GradleKotlinDslKtlintConventionPluginTest {
             data class Some(val name: String)
         """)
 
-        buildAndFail("ktlintMainCheck")
+        buildAndFail("ktlintMainSourceSetCheck")
 
         assertKtlintErrors(3)
         assertKtLintError("Top level elements must be separated by two blank lines", 3, 31)
@@ -211,7 +211,7 @@ class GradleKotlinDslKtlintConventionPluginTest {
             data class Some(val name: String)
         """)
 
-        build("ktlintMainCheck")
+        build("ktlintMainSourceSetCheck")
     }
 
     @Test
@@ -223,7 +223,7 @@ class GradleKotlinDslKtlintConventionPluginTest {
                 && "bazar".isNotEmpty() // either
         """)
 
-        build("ktlintMainCheck")
+        build("ktlintMainSourceSetCheck")
     }
 
     @Test
@@ -237,7 +237,7 @@ class GradleKotlinDslKtlintConventionPluginTest {
         val bar: String get() { return "bar" }
     """)
 
-        buildAndFail("ktlintMainCheck")
+        buildAndFail("ktlintMainSourceSetCheck")
 
         assertKtlintErrors(2)
         assertKtLintError("Property accessor must be on a new line", 2, 9)
@@ -253,7 +253,7 @@ class GradleKotlinDslKtlintConventionPluginTest {
             get() { return "bar" }
     """)
 
-        build("ktlintMainCheck")
+        build("ktlintMainSourceSetCheck")
     }
 
     private
@@ -295,7 +295,7 @@ class GradleKotlinDslKtlintConventionPluginTest {
         task(taskPath)?.outcome
 
     private
-    val ktlintReportFile: File by lazy { projectDir.resolve("build/reports/ktlint/ktlintMainCheck.txt") }
+    val ktlintReportFile: File by lazy { projectDir.resolve("build/reports/ktlint/ktlintMainSourceSetCheck.txt") }
 
     private
     fun assertKtlintErrors(count: Int) =
