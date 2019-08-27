@@ -5,7 +5,7 @@ plugins {
     `build-scan`
     `kotlin-dsl`
     id("com.github.johnrengelman.shadow") version "5.1.0" apply false
-    id("org.gradle.kotlin-dsl.ktlint-convention") version "0.4.0"
+    id("org.gradle.kotlin-dsl.ktlint-convention") version "0.4.1"
     `maven-publish`
     id("com.gradle.plugin-publish") version "0.10.1"
 }
