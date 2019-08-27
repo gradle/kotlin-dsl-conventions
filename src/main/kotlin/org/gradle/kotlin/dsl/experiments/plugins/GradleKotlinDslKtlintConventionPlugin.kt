@@ -36,7 +36,7 @@ class GradleKotlinDslKtlintConventionPlugin : Plugin<Project> {
             reporters.set(listOf(ReporterType.PLAIN))
         }
 
-        val ktlint = configurations.named("ktlint") {
+        val ktlint = configurations.maybeCreate("ktlint").apply {
             exclude(module = "ktlint-ruleset-standard")
         }
 
