@@ -2,16 +2,12 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.gradle.internal.hash.Hashing
 
 plugins {
-
     `build-scan`
-
     `kotlin-dsl`
-    id("com.github.johnrengelman.shadow") version "2.0.4" apply false
-
+    id("com.github.johnrengelman.shadow") version "5.1.0" apply false
     id("org.gradle.kotlin-dsl.ktlint-convention") version "0.3.0"
-
     `maven-publish`
-    id("com.gradle.plugin-publish") version "0.10.0"
+    id("com.gradle.plugin-publish") version "0.10.1"
 }
 
 group = "org.gradle.kotlin"
