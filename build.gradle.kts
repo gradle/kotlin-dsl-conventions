@@ -69,7 +69,7 @@ tasks {
         from(sourceSets.main.map { it.allSource })
         manifest.attributes.apply {
             put("Implementation-Title", "Gradle Kotlin DSL (${project.name})")
-            put("Implementation-Version", this@jar.version)
+            put("Implementation-Version", archiveVersion.get())
         }
     }
 }
@@ -107,8 +107,8 @@ val rulesetCompileOnly by configurations.getting {
 
 val generatedResourcesRulesetJarDir = file("$buildDir/generated-resources/ruleset/resources")
 val rulesetJar by tasks.registering(ShadowJar::class) {
-    archiveName = "gradle-kotlin-dsl-ruleset.jar"
-    destinationDir = generatedResourcesRulesetJarDir.resolve(basePackagePath)
+    archiveFileName.set("gradle-kotlin-dsl-ruleset.jar")
+    destinationDirectory.set(generatedResourcesRulesetJarDir.resolve(basePackagePath))
     configurations = listOf(rulesetShaded)
     from(ruleset.output)
 }
@@ -117,7 +117,7 @@ val rulesetChecksum by tasks.registering {
     val rulesetChecksumFile = generatedResourcesRulesetJarDir
         .resolve(basePackagePath)
         .resolve("gradle-kotlin-dsl-ruleset.md5")
-    val archivePath = rulesetJar.get().archivePath
+    val archivePath = rulesetJar.get().archiveFile.get().asFile
     inputs.file(archivePath)
     outputs.file(rulesetChecksumFile)
     doLast {
