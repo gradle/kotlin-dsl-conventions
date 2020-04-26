@@ -65,9 +65,13 @@ class GradleKotlinDslKtlintConventionPluginTest {
                     isPush = true
                 }
             }
+
         """)
 
-        withSource("""val foo = "bar"""")
+        withSource("""
+            val foo = "bar"
+
+        """)
 
         build("ktlintMainSourceSetCheck").apply {
 
@@ -103,6 +107,7 @@ class GradleKotlinDslKtlintConventionPluginTest {
                 private inline
                 fun something() = Unit
             }
+
         """)
 
         buildAndFail("ktlintMainSourceSetCheck")
@@ -126,6 +131,7 @@ class GradleKotlinDslKtlintConventionPluginTest {
                 private
                 inline fun something() = Unit
             }
+
         """)
 
         build("ktlintMainSourceSetCheck")
@@ -140,6 +146,7 @@ class GradleKotlinDslKtlintConventionPluginTest {
             import org.w3c.dom.*
 
             import org.gradle.kotlin.dsl.*
+
         """)
 
         buildAndFail("ktlintMainSourceSetCheck")
@@ -166,6 +173,7 @@ class GradleKotlinDslKtlintConventionPluginTest {
 
 
             data class Some(val name: String)
+
         """)
 
         buildAndFail("ktlintMainSourceSetCheck")
@@ -209,6 +217,7 @@ class GradleKotlinDslKtlintConventionPluginTest {
 
 
             data class Some(val name: String)
+
         """)
 
         build("ktlintMainSourceSetCheck")
@@ -221,6 +230,7 @@ class GradleKotlinDslKtlintConventionPluginTest {
 
             val foo = "bar".isNotEmpty()
                 && "bazar".isNotEmpty() // either
+
         """)
 
         build("ktlintMainSourceSetCheck")
@@ -235,6 +245,7 @@ class GradleKotlinDslKtlintConventionPluginTest {
 
 
         val bar: String get() { return "bar" }
+
     """)
 
         buildAndFail("ktlintMainSourceSetCheck")
@@ -251,6 +262,7 @@ class GradleKotlinDslKtlintConventionPluginTest {
 
         val bar: String
             get() { return "bar" }
+
     """)
 
         build("ktlintMainSourceSetCheck")

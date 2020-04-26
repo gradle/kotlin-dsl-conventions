@@ -1,6 +1,6 @@
 package org.gradle.kotlin.dsl.ktlint.ruleset
 
-import com.github.shyiko.ktlint.core.Rule
+import com.pinterest.ktlint.core.Rule
 
 import org.jetbrains.kotlin.KtNodeTypes.PRIMARY_CONSTRUCTOR
 import org.jetbrains.kotlin.KtNodeTypes.VALUE_PARAMETER

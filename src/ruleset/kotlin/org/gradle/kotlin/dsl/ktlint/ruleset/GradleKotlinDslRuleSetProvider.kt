@@ -1,32 +1,32 @@
 package org.gradle.kotlin.dsl.ktlint.ruleset
 
-import com.github.shyiko.ktlint.core.RuleSet
-import com.github.shyiko.ktlint.core.RuleSetProvider
-import com.github.shyiko.ktlint.ruleset.standard.CommentSpacingRule
-import com.github.shyiko.ktlint.ruleset.standard.FilenameRule
-import com.github.shyiko.ktlint.ruleset.standard.FinalNewlineRule
-import com.github.shyiko.ktlint.ruleset.standard.IndentationRule
-import com.github.shyiko.ktlint.ruleset.standard.MaxLineLengthRule
-import com.github.shyiko.ktlint.ruleset.standard.ModifierOrderRule
-import com.github.shyiko.ktlint.ruleset.standard.NoBlankLineBeforeRbraceRule
-import com.github.shyiko.ktlint.ruleset.standard.NoEmptyClassBodyRule
-import com.github.shyiko.ktlint.ruleset.standard.NoLineBreakAfterElseRule
-import com.github.shyiko.ktlint.ruleset.standard.NoLineBreakBeforeAssignmentRule
-import com.github.shyiko.ktlint.ruleset.standard.NoMultipleSpacesRule
-import com.github.shyiko.ktlint.ruleset.standard.NoSemicolonsRule
-import com.github.shyiko.ktlint.ruleset.standard.NoTrailingSpacesRule
-import com.github.shyiko.ktlint.ruleset.standard.NoUnitReturnRule
-import com.github.shyiko.ktlint.ruleset.standard.NoUnusedImportsRule
-import com.github.shyiko.ktlint.ruleset.standard.PackageNameRule
-import com.github.shyiko.ktlint.ruleset.standard.ParameterListWrappingRule
-import com.github.shyiko.ktlint.ruleset.standard.SpacingAroundColonRule
-import com.github.shyiko.ktlint.ruleset.standard.SpacingAroundCommaRule
-import com.github.shyiko.ktlint.ruleset.standard.SpacingAroundCurlyRule
-import com.github.shyiko.ktlint.ruleset.standard.SpacingAroundKeywordRule
-import com.github.shyiko.ktlint.ruleset.standard.SpacingAroundOperatorsRule
-import com.github.shyiko.ktlint.ruleset.standard.SpacingAroundParensRule
-import com.github.shyiko.ktlint.ruleset.standard.SpacingAroundRangeOperatorRule
-import com.github.shyiko.ktlint.ruleset.standard.StringTemplateRule
+import com.pinterest.ktlint.core.RuleSet
+import com.pinterest.ktlint.core.RuleSetProvider
+import com.pinterest.ktlint.ruleset.standard.CommentSpacingRule
+import com.pinterest.ktlint.ruleset.standard.FilenameRule
+import com.pinterest.ktlint.ruleset.standard.FinalNewlineRule
+import com.pinterest.ktlint.ruleset.standard.IndentationRule
+import com.pinterest.ktlint.ruleset.standard.MaxLineLengthRule
+import com.pinterest.ktlint.ruleset.standard.ModifierOrderRule
+import com.pinterest.ktlint.ruleset.standard.NoBlankLineBeforeRbraceRule
+import com.pinterest.ktlint.ruleset.standard.NoEmptyClassBodyRule
+import com.pinterest.ktlint.ruleset.standard.NoLineBreakAfterElseRule
+import com.pinterest.ktlint.ruleset.standard.NoLineBreakBeforeAssignmentRule
+import com.pinterest.ktlint.ruleset.standard.NoMultipleSpacesRule
+import com.pinterest.ktlint.ruleset.standard.NoSemicolonsRule
+import com.pinterest.ktlint.ruleset.standard.NoTrailingSpacesRule
+import com.pinterest.ktlint.ruleset.standard.NoUnitReturnRule
+import com.pinterest.ktlint.ruleset.standard.NoUnusedImportsRule
+import com.pinterest.ktlint.ruleset.standard.ParameterListWrappingRule
+import com.pinterest.ktlint.ruleset.standard.SpacingAroundColonRule
+import com.pinterest.ktlint.ruleset.standard.SpacingAroundCommaRule
+import com.pinterest.ktlint.ruleset.standard.SpacingAroundCurlyRule
+import com.pinterest.ktlint.ruleset.standard.SpacingAroundDotRule
+import com.pinterest.ktlint.ruleset.standard.SpacingAroundKeywordRule
+import com.pinterest.ktlint.ruleset.standard.SpacingAroundOperatorsRule
+import com.pinterest.ktlint.ruleset.standard.SpacingAroundParensRule
+import com.pinterest.ktlint.ruleset.standard.SpacingAroundRangeOperatorRule
+import com.pinterest.ktlint.ruleset.standard.StringTemplateRule
 
 
 /**
@@ -41,17 +41,13 @@ class GradleKotlinDslRuleSetProvider : RuleSetProvider {
             "gradle-kotlin-dsl",
 
             // ktlint standard ruleset rules --------------------------
-            // See https://github.com/shyiko/ktlint/blob/master/ktlint-ruleset-standard/src/main/kotlin/com/github/shyiko/ktlint/ruleset/standard/StandardRuleSetProvider.kt
+            // See https://github.com/pinterest/ktlint/blob/master/ktlint-ruleset-standard/src/main/kotlin/com/pinterest/ktlint/ruleset/standard/StandardRuleSetProvider.kt
 
             // kotlin-dsl: disabled in favor of CustomChainWrappingRule
             // ChainWrappingRule(),
             CommentSpacingRule(),
             FilenameRule(),
             FinalNewlineRule(),
-            PackageNameRule(),
-            // disabled until auto-correct is working properly
-            // (e.g. try formatting "if (true)\n    return { _ ->\n        _\n}")
-            // MultiLineIfElseRule(),
             // disabled until it's clear how to reconcile difference in Intellij & Android Studio import layout
             // ImportOrderingRule(),
             IndentationRule(),
@@ -61,8 +57,6 @@ class GradleKotlinDslRuleSetProvider : RuleSetProvider {
             // kotlin-dsl disabled in favor of BlankLinesRule
             // NoConsecutiveBlankLinesRule(),
             NoEmptyClassBodyRule(),
-            // disabled until it's clear what to do in case of `import _.it`
-            // NoItParamInMultilineLambdaRule(),
             NoLineBreakAfterElseRule(),
             NoLineBreakBeforeAssignmentRule(),
             NoMultipleSpacesRule(),
@@ -76,6 +70,7 @@ class GradleKotlinDslRuleSetProvider : RuleSetProvider {
             SpacingAroundColonRule(),
             SpacingAroundCommaRule(),
             SpacingAroundCurlyRule(),
+            SpacingAroundDotRule(),
             SpacingAroundKeywordRule(),
             SpacingAroundOperatorsRule(),
             SpacingAroundParensRule(),

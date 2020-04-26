@@ -1,6 +1,6 @@
 package org.gradle.kotlin.dsl.ktlint.ruleset
 
-import com.github.shyiko.ktlint.core.Rule
+import com.pinterest.ktlint.core.Rule
 
 import org.jetbrains.kotlin.com.intellij.lang.ASTNode
 import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.LeafPsiElement
