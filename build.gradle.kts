@@ -47,7 +47,7 @@ pluginBundle {
 
 dependencies {
 
-    compile("org.jlleitschuh.gradle:ktlint-gradle:8.2.0")
+    api("org.jlleitschuh.gradle:ktlint-gradle:9.2.1")
     implementation(kotlin("stdlib-jdk8"))
 
     runtimeOnly(kotlin("gradle-plugin"))

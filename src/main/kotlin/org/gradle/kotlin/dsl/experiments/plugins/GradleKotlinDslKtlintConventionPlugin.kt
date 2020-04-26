@@ -33,7 +33,9 @@ class GradleKotlinDslKtlintConventionPlugin : Plugin<Project> {
 
         configure<KtlintExtension> {
             version.set(DefaultVersions.ktlint)
-            reporters.set(listOf(ReporterType.PLAIN))
+            reporters {
+                reporter(ReporterType.PLAIN)
+            }
         }
 
         val ktlint = configurations.maybeCreate("ktlint").apply {
