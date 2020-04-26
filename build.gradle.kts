@@ -2,7 +2,6 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.gradle.internal.hash.Hashing
 
 plugins {
-    `build-scan`
     `kotlin-dsl`
     id("com.github.johnrengelman.shadow") version "5.1.0" apply false
     id("org.gradle.kotlin-dsl.ktlint-convention") version "0.4.1"
@@ -67,15 +66,6 @@ tasks {
             put("Implementation-Title", "Gradle Kotlin DSL (${project.name})")
             put("Implementation-Version", archiveVersion.get())
         }
-    }
-}
-
-if (System.getenv("CI") == "true") {
-    buildScan {
-        termsOfServiceUrl = "https://gradle.com/terms-of-service"
-        termsOfServiceAgree = "yes"
-        publishAlways()
-        tag("CI")
     }
 }
 
