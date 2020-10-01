@@ -22,12 +22,14 @@ class BlankLinesRule : Rule("gradle-kotlin-dsl-blank-lines") {
         val ignoredTopLevelElementTypes = listOf<IStubElementType<*, *>>(
             KtStubElementTypes.FILE_ANNOTATION_LIST,
             KtStubElementTypes.IMPORT_LIST,
-            KtStubElementTypes.PACKAGE_DIRECTIVE)
+            KtStubElementTypes.PACKAGE_DIRECTIVE
+        )
 
         private
         val ignoredTopLevelPsiTypes = listOf<KClass<*>>(
             PsiComment::class,
-            KDoc::class)
+            KDoc::class
+        )
     }
 
     private
@@ -65,7 +67,8 @@ class BlankLinesRule : Rule("gradle-kotlin-dsl-blank-lines") {
                 && node.treeNext.elementType !in ignoredTopLevelElementTypes
                 && ignoredTopLevelPsiTypes.none { it.isInstance(node.treeNext) }
                 && PsiTreeUtil.nextLeaf(node) != null /* not oef */
-                && split.size < 4) {
+                && split.size < 4
+            ) {
 
                 emit(node.startOffset, "Top level elements must be separated by two blank lines", false)
             }

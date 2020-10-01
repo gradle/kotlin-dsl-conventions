@@ -31,7 +31,8 @@ class GradleKotlinDslKtlintConventionPluginTest {
     @Before
     fun setup() {
         withSettings()
-        withBuildScript("""
+        withBuildScript(
+            """
             plugins {
                 kotlin("jvm") version "$embeddedKotlinVersion"
                 id("org.gradle.kotlin-dsl.ktlint-convention")
@@ -40,7 +41,8 @@ class GradleKotlinDslKtlintConventionPluginTest {
             repositories {
                 jcenter()
             }
-        """)
+            """
+        )
     }
 
     @Test
@@ -56,7 +58,8 @@ class GradleKotlinDslKtlintConventionPluginTest {
     fun `ktlint check tasks are cacheable`() {
 
         withFile("gradle.properties", "org.gradle.caching=true")
-        withSettings("""
+        withSettings(
+            """
             buildCache {
                 local { isEnabled = false }
                 remote<DirectoryBuildCache> {
@@ -66,12 +69,15 @@ class GradleKotlinDslKtlintConventionPluginTest {
                 }
             }
 
-        """)
+            """
+        )
 
-        withSource("""
+        withSource(
+            """
             val foo = "bar"
 
-        """)
+            """
+        )
 
         build("ktlintMainSourceSetCheck").apply {
 
@@ -94,7 +100,8 @@ class GradleKotlinDslKtlintConventionPluginTest {
     @Test
     fun `visibility modifiers on their own single line`() {
 
-        withSource("""
+        withSource(
+            """
 
             private val bar = false
 
@@ -108,7 +115,8 @@ class GradleKotlinDslKtlintConventionPluginTest {
                 fun something() = Unit
             }
 
-        """)
+            """
+        )
 
         buildAndFail("ktlintMainSourceSetCheck")
 
@@ -117,7 +125,8 @@ class GradleKotlinDslKtlintConventionPluginTest {
         assertKtLintError("Visibility modifiers must be on their own single line", 7, 5)
         assertKtLintError("Visibility modifiers must be on their own single line", 10, 5)
 
-        withSource("""
+        withSource(
+            """
 
             private
             val bar = false
@@ -132,7 +141,8 @@ class GradleKotlinDslKtlintConventionPluginTest {
                 inline fun something() = Unit
             }
 
-        """)
+            """
+        )
 
         build("ktlintMainSourceSetCheck")
     }
@@ -140,14 +150,16 @@ class GradleKotlinDslKtlintConventionPluginTest {
     @Test
     fun `allowed wildcard imports`() {
 
-        withSource("""
+        withSource(
+            """
 
             import java.util.*
             import org.w3c.dom.*
 
             import org.gradle.kotlin.dsl.*
 
-        """)
+            """
+        )
 
         buildAndFail("ktlintMainSourceSetCheck")
 
@@ -158,7 +170,8 @@ class GradleKotlinDslKtlintConventionPluginTest {
     @Test
     fun `blank lines`() {
 
-        withSource("""
+        withSource(
+            """
             package some
 
             import org.gradle.kotlin.dsl.*
@@ -174,7 +187,8 @@ class GradleKotlinDslKtlintConventionPluginTest {
 
             data class Some(val name: String)
 
-        """)
+            """
+        )
 
         buildAndFail("ktlintMainSourceSetCheck")
 
@@ -183,7 +197,8 @@ class GradleKotlinDslKtlintConventionPluginTest {
         assertKtLintError("Top level elements must be separated by two blank lines", 5, 16)
         assertKtLintError("Needless blank line(s)", 9, 1)
 
-        withSource("""
+        withSource(
+            """
             /*
              * Copyright 2016 the original author or authors.
              */
@@ -218,7 +233,8 @@ class GradleKotlinDslKtlintConventionPluginTest {
 
             data class Some(val name: String)
 
-        """)
+            """
+        )
 
         build("ktlintMainSourceSetCheck")
     }
@@ -226,12 +242,14 @@ class GradleKotlinDslKtlintConventionPluginTest {
     @Test
     fun `new lines starting with ANDAND are allowed`() {
 
-        withSource("""
+        withSource(
+            """
 
             val foo = "bar".isNotEmpty()
                 && "bazar".isNotEmpty() // either
 
-        """)
+            """
+        )
 
         build("ktlintMainSourceSetCheck")
     }
@@ -239,14 +257,16 @@ class GradleKotlinDslKtlintConventionPluginTest {
     @Test
     fun `property accessors on new line`() {
 
-        withSource("""
+        withSource(
+            """
 
-        val foo get() = "bar"
+            val foo get() = "bar"
 
 
-        val bar: String get() { return "bar" }
+            val bar: String get() { return "bar" }
 
-    """)
+            """
+        )
 
         buildAndFail("ktlintMainSourceSetCheck")
 
@@ -254,16 +274,18 @@ class GradleKotlinDslKtlintConventionPluginTest {
         assertKtLintError("Property accessor must be on a new line", 2, 9)
         assertKtLintError("Property accessor must be on a new line", 5, 17)
 
-        withSource("""
+        withSource(
+            """
 
-        val foo
-            get() = "bar"
+            val foo
+                get() = "bar"
 
 
-        val bar: String
-            get() { return "bar" }
+            val bar: String
+                get() { return "bar" }
 
-    """)
+            """
+        )
 
         build("ktlintMainSourceSetCheck")
     }
@@ -314,13 +336,15 @@ class GradleKotlinDslKtlintConventionPluginTest {
         assertThat(
             "ktlint error count in\n${ktlintReportFile.readText()}",
             ktlintReportFile.readLines().filter { it.contains("source.kt") }.count(),
-            equalTo(count))
+            equalTo(count)
+        )
 
     private
     fun assertKtLintError(error: String, line: Int, column: Int) =
         assertThat(
             ktlintReportFile.readText().withoutAnsiColorCodes(),
-            containsString("source.kt:$line:$column: $error"))
+            containsString("source.kt:$line:$column: $error")
+        )
 
     private
     fun String.withoutAnsiColorCodes() =
