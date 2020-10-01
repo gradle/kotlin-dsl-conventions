@@ -3,10 +3,10 @@ import org.gradle.internal.hash.Hashing
 
 plugins {
     `kotlin-dsl`
-    id("com.github.johnrengelman.shadow") version "5.2.0" apply false
+    id("com.github.johnrengelman.shadow") version "6.0.0" apply false
     id("org.gradle.kotlin-dsl.ktlint-convention") version "0.5.0"
     `maven-publish`
-    id("com.gradle.plugin-publish") version "0.11.0"
+    id("com.gradle.plugin-publish") version "0.12.0"
 }
 
 group = "org.gradle.kotlin"
