@@ -307,7 +307,7 @@ class GradleKotlinDslKtlintConventionPluginTest {
         task(taskPath)?.outcome
 
     private
-    val ktlintReportFile: File by lazy { projectDir.resolve("build/reports/ktlint/ktlintMainSourceSetCheck.txt") }
+    val ktlintReportFile: File by lazy { projectDir.resolve("build/reports/ktlint/ktlintMainSourceSetCheck/ktlintMainSourceSetCheck.txt") }
 
     private
     fun assertKtlintErrors(count: Int) =
