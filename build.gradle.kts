@@ -71,7 +71,7 @@ tasks {
 
 // default versions ---------------------------------------------------
 
-val ktlintVersion = "0.36.0"
+val ktlintVersion = "0.39.0"
 
 val basePackagePath = "org/gradle/kotlin/dsl/experiments/plugins"
 val processResources by tasks.existing(ProcessResources::class)
