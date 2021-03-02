@@ -11,8 +11,10 @@ plugins {
 
 group = "org.gradle.kotlin"
 
-kotlinDslPluginOptions {
-    experimentalWarning.set(false)
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(8))
+    }
 }
 
 repositories {
@@ -47,7 +49,7 @@ pluginBundle {
 
 dependencies {
 
-    api("org.jlleitschuh.gradle:ktlint-gradle:9.4.0")
+    api("org.jlleitschuh.gradle:ktlint-gradle:10.0.0")
     implementation(kotlin("stdlib-jdk8"))
 
     runtimeOnly(kotlin("gradle-plugin"))
@@ -57,8 +59,9 @@ dependencies {
 }
 
 tasks {
-    validateTaskProperties {
-        failOnWarning = true
+    validatePlugins {
+        enableStricterValidation.set(true)
+        failOnWarning.set(true)
     }
     jar {
         from(sourceSets.main.map { it.allSource })
