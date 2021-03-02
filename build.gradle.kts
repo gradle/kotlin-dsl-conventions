@@ -11,10 +11,6 @@ plugins {
 
 group = "org.gradle.kotlin"
 
-kotlinDslPluginOptions {
-    experimentalWarning.set(false)
-}
-
 repositories {
     gradlePluginPortal()
 }
