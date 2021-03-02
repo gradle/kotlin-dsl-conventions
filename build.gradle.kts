@@ -11,6 +11,12 @@ plugins {
 
 group = "org.gradle.kotlin"
 
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(8))
+    }
+}
+
 repositories {
     gradlePluginPortal()
 }
