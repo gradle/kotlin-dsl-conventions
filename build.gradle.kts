@@ -59,8 +59,9 @@ dependencies {
 }
 
 tasks {
-    validateTaskProperties {
-        failOnWarning = true
+    validatePlugins {
+        enableStricterValidation.set(true)
+        failOnWarning.set(true)
     }
     jar {
         from(sourceSets.main.map { it.allSource })
