@@ -4,7 +4,7 @@ import org.gradle.internal.hash.Hashing
 plugins {
     `kotlin-dsl`
     id("com.github.johnrengelman.shadow") version "6.0.0" apply false
-    id("org.gradle.kotlin-dsl.ktlint-convention") version "0.7.0"
+    id("org.gradle.kotlin-dsl.ktlint-convention") version "0.8.0"
     `maven-publish`
     id("com.gradle.plugin-publish") version "1.0.0-rc-3"
 }
