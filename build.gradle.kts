@@ -74,7 +74,7 @@ tasks {
 
 // default versions ---------------------------------------------------
 
-val ktlintVersion = "0.39.0"
+val ktlintVersion = "0.45.2"
 
 val basePackagePath = "org/gradle/kotlin/dsl/experiments/plugins"
 val processResources by tasks.existing(ProcessResources::class)
@@ -124,5 +124,4 @@ dependencies {
         isTransitive = false
     }
     rulesetCompileOnly("com.pinterest.ktlint:ktlint-core:$ktlintVersion")
-    rulesetCompileOnly(kotlin("reflect"))
 }
