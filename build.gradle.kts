@@ -6,7 +6,7 @@ plugins {
     id("com.github.johnrengelman.shadow") version "6.0.0" apply false
     id("org.gradle.kotlin-dsl.ktlint-convention") version "0.7.0"
     `maven-publish`
-    id("com.gradle.plugin-publish") version "0.12.0"
+    id("com.gradle.plugin-publish") version "1.0.0-rc-3"
 }
 
 group = "org.gradle.kotlin"
@@ -26,6 +26,8 @@ gradlePlugin {
         register("ktlint-convention") {
             id = "org.gradle.kotlin-dsl.ktlint-convention"
             implementationClass = "org.gradle.kotlin.dsl.experiments.plugins.GradleKotlinDslKtlintConventionPlugin"
+            displayName = "Gradle Kotlin DSL ktlint convention plugin"
+            description = "Gradle Kotlin DSL ktlint convention plugin"
         }
     }
 }
@@ -35,16 +37,6 @@ pluginBundle {
     tags = listOf("Kotlin", "DSL")
     website = "https://github.com/gradle/kotlin-dsl-conventions"
     vcsUrl = "https://github.com/gradle/kotlin-dsl-conventions"
-    mavenCoordinates {
-        group = project.group.toString()
-        artifactId = base.archivesBaseName
-    }
-    plugins {
-        named("ktlint-convention") {
-            displayName = "Gradle Kotlin DSL ktlint convention plugin"
-            description = "Gradle Kotlin DSL ktlint convention plugin"
-        }
-    }
 }
 
 dependencies {
