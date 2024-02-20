@@ -1,7 +1,9 @@
 package org.gradle.kotlin.dsl.ktlint.ruleset
 
+import com.pinterest.ktlint.core.RuleProvider
 import com.pinterest.ktlint.core.RuleSet
 import com.pinterest.ktlint.core.RuleSetProvider
+import com.pinterest.ktlint.core.RuleSetProviderV2
 import com.pinterest.ktlint.ruleset.standard.CommentSpacingRule
 import com.pinterest.ktlint.ruleset.standard.FilenameRule
 import com.pinterest.ktlint.ruleset.standard.FinalNewlineRule
@@ -34,7 +36,7 @@ import com.pinterest.ktlint.ruleset.standard.StringTemplateRule
  *
  * Reuse ktlint-standard-ruleset rules and add custom ones.
  */
-class GradleKotlinDslRuleSetProvider : RuleSetProvider {
+class GradleKotlinDslRuleSetProvider : RuleSetProvider, RuleSetProviderV2("gradle-kotlin-dsl", About(null, null, null, null, null)) {
 
     override fun get(): RuleSet =
         RuleSet(
@@ -85,4 +87,7 @@ class GradleKotlinDslRuleSetProvider : RuleSetProvider {
             VisibilityModifiersOwnLineRule(),
             PropertyAccessorOnNewLine()
         )
+
+    override fun getRuleProviders(): Set<RuleProvider> =
+        get().rules.map { rule -> RuleProvider { rule } }.toSet()
 }

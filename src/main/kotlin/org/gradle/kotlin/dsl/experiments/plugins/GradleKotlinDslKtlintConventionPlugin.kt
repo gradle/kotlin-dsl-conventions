@@ -42,9 +42,13 @@ class GradleKotlinDslKtlintConventionPlugin : Plugin<Project> {
             exclude(module = "ktlint-ruleset-standard")
         }
 
+        val ktlintRuleset = configurations.maybeCreate("ktlintRuleset").apply {
+            exclude(module = "ktlint-ruleset-standard")
+        }
+
         dependencies {
-            ktlint.name(files(gradleKotlinDslKtlintRulesetJar()))
             ktlint.name(kotlin("reflect"))
+            ktlintRuleset.name(files(gradleKotlinDslKtlintRulesetJar()))
         }
     }
 

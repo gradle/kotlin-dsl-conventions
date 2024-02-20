@@ -315,7 +315,7 @@ class GradleKotlinDslKtlintConventionPluginTest {
 
     private
     fun withSource(text: String) =
-        withFile("src/main/kotlin/Source.kt", text)
+        withFile("src/main/kotlin/source.kt", text)
 
     private
     fun withFile(path: String, text: String) =
@@ -335,7 +335,7 @@ class GradleKotlinDslKtlintConventionPluginTest {
     fun assertKtlintErrors(count: Int) =
         assertThat(
             "ktlint error count in\n${ktlintReportFile.readText()}",
-            ktlintReportFile.readLines().filter { it.contains("Source.kt") }.count(),
+            ktlintReportFile.readLines().filter { it.contains("source.kt") }.count(),
             equalTo(count)
         )
 
@@ -343,7 +343,7 @@ class GradleKotlinDslKtlintConventionPluginTest {
     fun assertKtLintError(error: String, line: Int, column: Int) =
         assertThat(
             ktlintReportFile.readText().withoutAnsiColorCodes(),
-            containsString("Source.kt:$line:$column: $error")
+            containsString("source.kt:$line:$column: $error")
         )
 
     private
