@@ -1,6 +1,7 @@
 package org.gradle.kotlin.dsl.ktlint.ruleset
 
-import com.pinterest.ktlint.core.Rule
+import com.pinterest.ktlint.rule.engine.core.api.Rule
+import com.pinterest.ktlint.rule.engine.core.api.RuleId
 
 import org.jetbrains.kotlin.com.intellij.lang.ASTNode
 import org.jetbrains.kotlin.psi.KtImportDirective
@@ -19,9 +20,9 @@ val allowedWildcardImports = listOf(
 )
 
 
-class CustomImportsRule : Rule("gradle-kotlin-dsl-imports") {
+class CustomImportsRule : Rule(RuleId("gradle-kotlin-dsl:imports"), About()) {
 
-    override fun visit(
+    override fun beforeVisitChildNodes(
         node: ASTNode,
         autoCorrect: Boolean,
         emit: (offset: Int, errorMessage: String, canBeAutoCorrected: Boolean) -> Unit

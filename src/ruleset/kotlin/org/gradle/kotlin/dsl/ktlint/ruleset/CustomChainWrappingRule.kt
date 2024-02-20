@@ -1,6 +1,7 @@
 package org.gradle.kotlin.dsl.ktlint.ruleset
 
-import com.pinterest.ktlint.core.Rule
+import com.pinterest.ktlint.rule.engine.core.api.Rule
+import com.pinterest.ktlint.rule.engine.core.api.RuleId
 
 import org.jetbrains.kotlin.com.intellij.lang.ASTNode
 import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.LeafPsiElement
@@ -12,7 +13,10 @@ import org.jetbrains.kotlin.psi.psiUtil.prevLeaf
 
 
 // Same as upstream except it doesn't have checks for "same line tokens"
-class CustomChainWrappingRule : Rule("gradle-kotlin-dsl-chain-wrapping") {
+class CustomChainWrappingRule : Rule(
+    RuleId("gradle-kotlin-dsl:chain-wrapping"),
+    About()
+) {
 
     private
     val nextLineTokens = TokenSet.create(KtTokens.DOT, KtTokens.SAFE_ACCESS, KtTokens.ELVIS)
@@ -20,7 +24,7 @@ class CustomChainWrappingRule : Rule("gradle-kotlin-dsl-chain-wrapping") {
     private
     val noSpaceAroundTokens = TokenSet.create(KtTokens.DOT, KtTokens.SAFE_ACCESS)
 
-    override fun visit(
+    override fun beforeVisitChildNodes(
         node: ASTNode,
         autoCorrect: Boolean,
         emit: (offset: Int, errorMessage: String, canBeAutoCorrected: Boolean) -> Unit

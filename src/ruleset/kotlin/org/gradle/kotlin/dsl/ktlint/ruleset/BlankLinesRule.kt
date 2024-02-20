@@ -1,6 +1,7 @@
 package org.gradle.kotlin.dsl.ktlint.ruleset
 
-import com.pinterest.ktlint.core.Rule
+import com.pinterest.ktlint.rule.engine.core.api.Rule
+import com.pinterest.ktlint.rule.engine.core.api.RuleId
 
 import org.jetbrains.kotlin.com.intellij.lang.ASTNode
 import org.jetbrains.kotlin.com.intellij.psi.PsiComment
@@ -14,7 +15,7 @@ import org.jetbrains.kotlin.psi.stubs.elements.KtStubElementTypes
 import kotlin.reflect.KClass
 
 
-class BlankLinesRule : Rule("gradle-kotlin-dsl-blank-lines") {
+class BlankLinesRule : Rule(RuleId("gradle-kotlin-dsl:blank-lines"), About("Gradle", repositoryUrl = "https://github.com/gradle/kotlin-dsl-conventions", issueTrackerUrl = "https://github.com/gradle/kotlin-dsl-conventions/issues")) {
 
     companion object {
 
@@ -35,7 +36,7 @@ class BlankLinesRule : Rule("gradle-kotlin-dsl-blank-lines") {
     private
     var skippedFirstTopLevelWhiteSpace = false
 
-    override fun visit(
+    override fun beforeVisitChildNodes(
         node: ASTNode,
         autoCorrect: Boolean,
         emit: (offset: Int, errorMessage: String, canBeAutoCorrected: Boolean) -> Unit

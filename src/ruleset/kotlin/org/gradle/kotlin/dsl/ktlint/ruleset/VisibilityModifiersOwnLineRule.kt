@@ -1,6 +1,7 @@
 package org.gradle.kotlin.dsl.ktlint.ruleset
 
-import com.pinterest.ktlint.core.Rule
+import com.pinterest.ktlint.rule.engine.core.api.Rule
+import com.pinterest.ktlint.rule.engine.core.api.RuleId
 
 import org.jetbrains.kotlin.KtNodeTypes.PRIMARY_CONSTRUCTOR
 import org.jetbrains.kotlin.KtNodeTypes.VALUE_PARAMETER
@@ -11,7 +12,10 @@ import org.jetbrains.kotlin.lexer.KtTokens.WHITE_SPACE
 import org.jetbrains.kotlin.psi.KtDeclarationModifierList
 
 
-class VisibilityModifiersOwnLineRule : Rule("visibility-modifiers-own-line") {
+class VisibilityModifiersOwnLineRule : Rule(
+    RuleId("gradle-kotlin-dsl:visibility-modifiers-own-line"),
+    About()
+) {
 
     private
     val ownSingleLineModifierTokens = arrayOf(
@@ -55,7 +59,7 @@ class VisibilityModifiersOwnLineRule : Rule("visibility-modifiers-own-line") {
     private
     val skippedParents = listOf(PRIMARY_CONSTRUCTOR, VALUE_PARAMETER)
 
-    override fun visit(
+    override fun beforeVisitChildNodes(
         node: ASTNode,
         autoCorrect: Boolean,
         emit: (offset: Int, errorMessage: String, canBeAutoCorrected: Boolean) -> Unit
