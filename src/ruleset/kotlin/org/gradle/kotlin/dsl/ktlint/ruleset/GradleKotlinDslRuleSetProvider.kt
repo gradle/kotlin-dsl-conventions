@@ -48,7 +48,8 @@ class GradleKotlinDslRuleSetProvider : RuleSetProvider, RuleSetProviderV2("gradl
             // kotlin-dsl: disabled in favor of CustomChainWrappingRule
             // ChainWrappingRule(),
             CommentSpacingRule(),
-            FilenameRule(),
+            // disabled, since it requires all files to be PascalCase
+//            FilenameRule(),
             FinalNewlineRule(),
             // disabled until it's clear how to reconcile difference in Intellij & Android Studio import layout
             // ImportOrderingRule(),
