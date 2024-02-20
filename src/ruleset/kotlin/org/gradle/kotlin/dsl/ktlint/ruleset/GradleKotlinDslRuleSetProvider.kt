@@ -36,59 +36,70 @@ import com.pinterest.ktlint.ruleset.standard.StringTemplateRule
  *
  * Reuse ktlint-standard-ruleset rules and add custom ones.
  */
-class GradleKotlinDslRuleSetProvider : RuleSetProvider, RuleSetProviderV2("gradle-kotlin-dsl", About(null, null, null, null, null)) {
+class GradleKotlinDslRuleSetProvider : RuleSetProvider, RuleSetProviderV2(
+    "gradle-kotlin-dsl",
+    About(
+        maintainer = "Gradle",
+        description = "Gradle Kotlin DSL conventional plugins",
+        license = "Apache-2.0",
+        repositoryUrl = "https://github.com/gradle/kotlin-dsl-conventions",
+        issueTrackerUrl = "https://github.com/gradle/kotlin-dsl-conventions/issues"
+    )) {
 
+    @Suppress("DEPRECATION")
     override fun get(): RuleSet =
         RuleSet(
             "gradle-kotlin-dsl",
 
+             *(getRuleProviders().map { it.createNewRuleInstance() }.toTypedArray())
+        )
+
+    override fun getRuleProviders(): Set<RuleProvider> =
+        setOf(
             // ktlint standard ruleset rules --------------------------
             // See https://github.com/pinterest/ktlint/blob/master/ktlint-ruleset-standard/src/main/kotlin/com/pinterest/ktlint/ruleset/standard/StandardRuleSetProvider.kt
 
             // kotlin-dsl: disabled in favor of CustomChainWrappingRule
             // ChainWrappingRule(),
-            CommentSpacingRule(),
+            RuleProvider { CommentSpacingRule() },
             // disabled, since it requires all files to be PascalCase
-//            FilenameRule(),
-            FinalNewlineRule(),
+            // RuleProvider { FilenameRule() },
+            RuleProvider { FinalNewlineRule() },
             // disabled until it's clear how to reconcile difference in Intellij & Android Studio import layout
-            // ImportOrderingRule(),
-            IndentationRule(),
-            MaxLineLengthRule(),
-            ModifierOrderRule(),
-            NoBlankLineBeforeRbraceRule(),
+            // RuleProvider { ImportOrderingRule() },
+            RuleProvider { IndentationRule() },
+            RuleProvider { MaxLineLengthRule() },
+            RuleProvider { ModifierOrderRule() },
+            RuleProvider { NoBlankLineBeforeRbraceRule() },
             // kotlin-dsl disabled in favor of BlankLinesRule
-            // NoConsecutiveBlankLinesRule(),
-            NoEmptyClassBodyRule(),
-            NoLineBreakAfterElseRule(),
-            NoLineBreakBeforeAssignmentRule(),
-            NoMultipleSpacesRule(),
-            NoSemicolonsRule(),
-            NoTrailingSpacesRule(),
-            NoUnitReturnRule(),
-            NoUnusedImportsRule(),
+            // RuleProvider { NoConsecutiveBlankLinesRule() },
+            RuleProvider { NoEmptyClassBodyRule() },
+            RuleProvider { NoLineBreakAfterElseRule() },
+            RuleProvider { NoLineBreakBeforeAssignmentRule() },
+            RuleProvider { NoMultipleSpacesRule() },
+            RuleProvider { NoSemicolonsRule() },
+            RuleProvider { NoTrailingSpacesRule() },
+            RuleProvider { NoUnitReturnRule() },
+            RuleProvider { NoUnusedImportsRule() },
             // kotlin-dsl: disabled in favor of CustomImportsRule
-            // NoWildcardImportsRule(),
-            ParameterListWrappingRule(),
-            SpacingAroundColonRule(),
-            SpacingAroundCommaRule(),
-            SpacingAroundCurlyRule(),
-            SpacingAroundDotRule(),
-            SpacingAroundKeywordRule(),
-            SpacingAroundOperatorsRule(),
-            SpacingAroundParensRule(),
-            SpacingAroundRangeOperatorRule(),
-            StringTemplateRule(),
+            // RuleProvider { NoWildcardImportsRule() },
+            RuleProvider { ParameterListWrappingRule() },
+            RuleProvider { SpacingAroundColonRule() },
+            RuleProvider { SpacingAroundCommaRule() },
+            RuleProvider { SpacingAroundCurlyRule() },
+            RuleProvider { SpacingAroundDotRule() },
+            RuleProvider { SpacingAroundKeywordRule() },
+            RuleProvider { SpacingAroundOperatorsRule() },
+            RuleProvider { SpacingAroundParensRule() },
+            RuleProvider { SpacingAroundRangeOperatorRule() },
+            RuleProvider { StringTemplateRule() },
 
             // gradle-kotlin-dsl rules --------------------------------
 
-            BlankLinesRule(),
-            CustomChainWrappingRule(),
-            CustomImportsRule(),
-            VisibilityModifiersOwnLineRule(),
-            PropertyAccessorOnNewLine()
+            RuleProvider { BlankLinesRule() },
+            RuleProvider { CustomChainWrappingRule() },
+            RuleProvider { CustomImportsRule() },
+            RuleProvider { VisibilityModifiersOwnLineRule() },
+            RuleProvider { PropertyAccessorOnNewLine() }
         )
-
-    override fun getRuleProviders(): Set<RuleProvider> =
-        get().rules.map { rule -> RuleProvider { rule } }.toSet()
 }
