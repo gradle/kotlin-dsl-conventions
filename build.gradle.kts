@@ -3,10 +3,10 @@ import org.gradle.internal.hash.Hashing
 
 plugins {
     `kotlin-dsl`
-    id("com.github.johnrengelman.shadow") version "6.0.0" apply false
+    id("com.github.johnrengelman.shadow") version "8.1.1" apply false
     id("org.gradle.kotlin-dsl.ktlint-convention") version "0.8.0"
     `maven-publish`
-    id("com.gradle.plugin-publish") version "1.0.0-rc-3"
+    id("com.gradle.plugin-publish") version "1.2.1"
 }
 
 group = "org.gradle.kotlin"
@@ -22,21 +22,17 @@ repositories {
 }
 
 gradlePlugin {
+    website = "https://github.com/gradle/kotlin-dsl-conventions"
+    vcsUrl = "https://github.com/gradle/kotlin-dsl-conventions"
     plugins {
         register("ktlint-convention") {
             id = "org.gradle.kotlin-dsl.ktlint-convention"
             implementationClass = "org.gradle.kotlin.dsl.experiments.plugins.GradleKotlinDslKtlintConventionPlugin"
             displayName = "Gradle Kotlin DSL ktlint convention plugin"
             description = "Gradle Kotlin DSL ktlint convention plugin"
+            tags = listOf("Kotlin", "DSL")
         }
     }
-}
-
-
-pluginBundle {
-    tags = listOf("Kotlin", "DSL")
-    website = "https://github.com/gradle/kotlin-dsl-conventions"
-    vcsUrl = "https://github.com/gradle/kotlin-dsl-conventions"
 }
 
 dependencies {
@@ -47,7 +43,7 @@ dependencies {
     runtimeOnly(kotlin("gradle-plugin"))
 
     testImplementation(gradleTestKit())
-    testImplementation("junit:junit:4.12")
+    testImplementation("junit:junit:4.13.2")
 }
 
 tasks {
@@ -71,7 +67,7 @@ val ktlintVersion = "0.45.2"
 val basePackagePath = "org/gradle/kotlin/dsl/experiments/plugins"
 val processResources by tasks.existing(ProcessResources::class)
 val writeDefaultVersionsProperties by tasks.registering(WriteProperties::class) {
-    outputFile = processResources.get().destinationDir.resolve("$basePackagePath/default-versions.properties")
+    destinationFile = processResources.get().destinationDir.resolve("$basePackagePath/default-versions.properties")
     property("ktlint", ktlintVersion)
 }
 processResources {
@@ -86,24 +82,24 @@ val rulesetCompileOnly by configurations.getting {
     extendsFrom(rulesetShaded)
 }
 
-val generatedResourcesRulesetJarDir = file("$buildDir/generated-resources/ruleset/resources")
+val generatedResourcesRulesetJarDir = layout.buildDirectory.dir("generated-resources/ruleset/resources")
 val rulesetJar by tasks.registering(ShadowJar::class) {
     archiveFileName.set("gradle-kotlin-dsl-ruleset.jar")
-    destinationDirectory.set(generatedResourcesRulesetJarDir.resolve(basePackagePath))
+    destinationDirectory.set(generatedResourcesRulesetJarDir.map { it.dir(basePackagePath) })
     configurations = listOf(rulesetShaded)
     from(ruleset.output)
 }
 val rulesetChecksum by tasks.registering {
     dependsOn(rulesetJar)
     val rulesetChecksumFile = generatedResourcesRulesetJarDir
-        .resolve(basePackagePath)
-        .resolve("gradle-kotlin-dsl-ruleset.md5")
+        .map { it.dir(basePackagePath).file("gradle-kotlin-dsl-ruleset.md5") }
     val archivePath = rulesetJar.get().archiveFile.get().asFile
     inputs.file(archivePath)
     outputs.file(rulesetChecksumFile)
     doLast {
-        rulesetChecksumFile.parentFile.mkdirs()
-        rulesetChecksumFile.writeText(Hashing.md5().hashBytes(archivePath.readBytes()).toString())
+        val resolvedChecksumFile = rulesetChecksumFile.get().asFile
+        resolvedChecksumFile.parentFile.mkdirs()
+        resolvedChecksumFile.writeText(Hashing.md5().hashBytes(archivePath.readBytes()).toString())
     }
 }
 

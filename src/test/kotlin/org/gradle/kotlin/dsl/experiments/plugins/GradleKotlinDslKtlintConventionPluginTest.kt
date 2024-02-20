@@ -39,7 +39,7 @@ class GradleKotlinDslKtlintConventionPluginTest {
             }
 
             repositories {
-                jcenter()
+                mavenCentral()
             }
             """
         )
