@@ -37,7 +37,7 @@ gradlePlugin {
 
 dependencies {
 
-    api("org.jlleitschuh.gradle:ktlint-gradle:10.3.0")
+    api("org.jlleitschuh.gradle:ktlint-gradle:12.1.0")
     implementation(kotlin("stdlib-jdk8"))
 
     runtimeOnly(kotlin("gradle-plugin"))
@@ -62,7 +62,7 @@ tasks {
 
 // default versions ---------------------------------------------------
 
-val ktlintVersion = "0.45.2"
+val ktlintVersion = "0.47.1"
 
 val basePackagePath = "org/gradle/kotlin/dsl/experiments/plugins"
 val processResources by tasks.existing(ProcessResources::class)
