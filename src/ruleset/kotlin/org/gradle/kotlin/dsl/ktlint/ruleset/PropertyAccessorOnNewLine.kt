@@ -8,7 +8,7 @@ import org.jetbrains.kotlin.com.intellij.lang.ASTNode
 
 class PropertyAccessorOnNewLine : Rule("property-get-new-line") {
 
-    override fun visit(
+    override fun beforeVisitChildNodes(
         node: ASTNode,
         autoCorrect: Boolean,
         emit: (offset: Int, errorMessage: String, canBeAutoCorrected: Boolean) -> Unit

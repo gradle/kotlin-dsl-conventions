@@ -55,7 +55,7 @@ class VisibilityModifiersOwnLineRule : Rule("visibility-modifiers-own-line") {
     private
     val skippedParents = listOf(PRIMARY_CONSTRUCTOR, VALUE_PARAMETER)
 
-    override fun visit(
+    override fun beforeVisitChildNodes(
         node: ASTNode,
         autoCorrect: Boolean,
         emit: (offset: Int, errorMessage: String, canBeAutoCorrected: Boolean) -> Unit

@@ -21,7 +21,7 @@ val allowedWildcardImports = listOf(
 
 class CustomImportsRule : Rule("gradle-kotlin-dsl-imports") {
 
-    override fun visit(
+    override fun beforeVisitChildNodes(
         node: ASTNode,
         autoCorrect: Boolean,
         emit: (offset: Int, errorMessage: String, canBeAutoCorrected: Boolean) -> Unit
