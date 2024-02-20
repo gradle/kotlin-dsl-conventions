@@ -1,15 +1,14 @@
 package org.gradle.kotlin.dsl.ktlint.ruleset
 
-import com.pinterest.ktlint.rule.engine.core.api.Rule
-import com.pinterest.ktlint.rule.engine.core.api.RuleId
+import com.pinterest.ktlint.core.Rule
 import org.jetbrains.kotlin.KtNodeTypes
 
 import org.jetbrains.kotlin.com.intellij.lang.ASTNode
 
 
-class PropertyAccessorOnNewLine : Rule(RuleId("gradle-kotlin-dsl:property-get-new-line"), About()) {
+class PropertyAccessorOnNewLine : Rule("property-get-new-line") {
 
-    override fun beforeVisitChildNodes(
+    override fun visit(
         node: ASTNode,
         autoCorrect: Boolean,
         emit: (offset: Int, errorMessage: String, canBeAutoCorrected: Boolean) -> Unit
