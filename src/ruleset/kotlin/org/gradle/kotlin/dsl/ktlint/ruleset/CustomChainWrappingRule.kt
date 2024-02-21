@@ -20,7 +20,7 @@ class CustomChainWrappingRule : Rule("gradle-kotlin-dsl-chain-wrapping") {
     private
     val noSpaceAroundTokens = TokenSet.create(KtTokens.DOT, KtTokens.SAFE_ACCESS)
 
-    override fun visit(
+    override fun beforeVisitChildNodes(
         node: ASTNode,
         autoCorrect: Boolean,
         emit: (offset: Int, errorMessage: String, canBeAutoCorrected: Boolean) -> Unit
