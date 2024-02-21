@@ -5,7 +5,6 @@ import com.pinterest.ktlint.core.RuleSet
 import com.pinterest.ktlint.core.RuleSetProvider
 import com.pinterest.ktlint.core.RuleSetProviderV2
 import com.pinterest.ktlint.ruleset.standard.CommentSpacingRule
-import com.pinterest.ktlint.ruleset.standard.FilenameRule
 import com.pinterest.ktlint.ruleset.standard.FinalNewlineRule
 import com.pinterest.ktlint.ruleset.standard.IndentationRule
 import com.pinterest.ktlint.ruleset.standard.MaxLineLengthRule
@@ -51,7 +50,7 @@ class GradleKotlinDslRuleSetProvider : RuleSetProvider, RuleSetProviderV2(
         RuleSet(
             "gradle-kotlin-dsl",
 
-             *(getRuleProviders().map { it.createNewRuleInstance() }.toTypedArray())
+            *(getRuleProviders().map { it.createNewRuleInstance() }.toTypedArray())
         )
 
     override fun getRuleProviders(): Set<RuleProvider> =
