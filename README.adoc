@@ -1,3 +1,6 @@
+
+⚠️  THIS PLUGIN IS OUT OF DATE AND NOT MAINTAINED ANYMORE
+
 = Gradle Kotlin DSL conventional plugins
 
 image:https://travis-ci.org/gradle/kotlin-dsl-conventions.svg?branch=master["Build Status", link="https://travis-ci.org/gradle/kotlin-dsl-conventions"]
